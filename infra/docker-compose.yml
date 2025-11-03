@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: infra/backend.Dockerfile
+    working_dir: /app/backend
+    environment:
+      - PORT=8000
+      - CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+      - DATABASE_URL=sqlite:////data/app.db
+      - LLM_PROVIDER=mock
+    volumes:
+      - ../backend:/app/backend
+      - backend-data:/data
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: infra/frontend.Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  backend-data:

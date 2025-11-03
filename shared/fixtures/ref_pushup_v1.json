@@ -1,0 +1,13 @@
+{
+  "id": "ref-pushup-v1",
+  "exercise_id": "pushup",
+  "name": "Push-up Reference Template v1",
+  "fps": 30,
+  "phase_labels": ["top", "eccentric", "bottom", "concentric"],
+  "joint_angles": [
+    [170.0, 180.0, 170.0],
+    [150.0, 175.0, 160.0],
+    [90.0, 165.0, 100.0],
+    [160.0, 175.0, 165.0]
+  ]
+}
