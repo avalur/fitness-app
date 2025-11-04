@@ -135,6 +135,8 @@ How to use locally:
 4. Choose the exercise (Push‑up or Squat). Landmarks are detected in the browser; only keypoints are sent to `/ws/session`.
 5. Watch the counter, traffic‑light bar, and tips update in real time. Click “Stop Session” to stop.
 
+Overlay note: The live overlay draws per‑side segments for arms (wrist→elbow→shoulder) and legs (ankle→knee→hip) for better visualization.
+
 Notes and tips:
 - Performance target is ~30 FPS; actual FPS depends on your device. If slow, reduce resolution in code or browser zoom.
 - Privacy: by default, no raw video leaves your device. Only normalized 2D keypoints are sent to the server for counting.

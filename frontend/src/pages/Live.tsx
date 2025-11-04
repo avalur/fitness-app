@@ -78,6 +78,46 @@ export default function Live() {
       ctx.arc(x, y, 3, 0, Math.PI * 2)
       ctx.fill()
     }
+
+    // --- Update: draw separate left and right segments for hand→elbow and elbow→shoulder ---
+    type P = { x: number; y: number; score?: number }
+    const get = (name: string): P | null => (f.keypoints as any)[name] || null
+    const toPx = (p: P) => ({ x: p.x * w, y: p.y * h })
+    const drawSeg = (p1: P, p2: P) => {
+      const a = toPx(p1)
+      const b = toPx(p2)
+      ctx.beginPath()
+      ctx.moveTo(a.x, a.y)
+      ctx.lineTo(b.x, b.y)
+      ctx.stroke()
+    }
+    const minScore = 0.3
+    const hasGood = (p: P | null) => !!p && (p.score ?? 1) >= minScore
+    const drawIf = (aName: string, bName: string) => {
+      const a = get(aName)
+      const b = get(bName)
+      if (hasGood(a) && hasGood(b)) drawSeg(a as P, b as P)
+    }
+
+    ctx.save()
+    ctx.lineWidth = 3
+    // Per user request, both sides share the same style
+    ctx.strokeStyle = '#ffd166' // warm accent for better visibility
+    ctx.shadowColor = 'rgba(0,0,0,0.35)'
+    ctx.shadowBlur = 2
+    // Left arm
+    drawIf('left_wrist', 'left_elbow')
+    drawIf('left_elbow', 'left_shoulder')
+    // Right arm
+    drawIf('right_wrist', 'right_elbow')
+    drawIf('right_elbow', 'right_shoulder')
+    // Left leg
+    drawIf('left_ankle', 'left_knee')
+    drawIf('left_knee', 'left_hip')
+    // Right leg
+    drawIf('right_ankle', 'right_knee')
+    drawIf('right_knee', 'right_hip')
+    ctx.restore()
   }
 
   return (
