@@ -122,14 +122,22 @@ Notes
 -----
 - As of October 31, 2025, the defaults are tested locally on macOS and Linux with Python 3.11+ and Node 18+.
 
-Camera preview (Live tab)
--------------------------
-- The Live tab now includes a basic camera preview using the browser `getUserMedia` API. No LLM processing yet.
-- To use it locally on macOS:
-  1. Start the frontend with `make frontend` and open `http://localhost:5173` (localhost is a secure context).
-  2. Navigate to the “Live” tab and grant camera permissions in the browser prompt.
-  3. If access was denied previously, re‑enable camera access in macOS System Settings → Privacy & Security → Camera.
-  4. Use the Resolution and Camera dropdowns to switch devices and quality.
-  5. Click Start/Stop to control the camera.
+Live pose + real‑time rep counting (M2)
+--------------------------------------
+The Live page now runs client‑side pose estimation (TF.js MoveNet Lightning) and streams keypoints to the backend via WebSocket for real‑time rep counting.
+
+How to use locally:
+1. Start backend and frontend (two terminals):
+   - Backend: `make backend` (http://localhost:8000)
+   - Frontend: `make frontend` (http://localhost:5173)
+2. Open the frontend in the browser and go to “Live”.
+3. Click “Start Session” (required on iOS due to autoplay policies) and allow camera access.
+4. Choose the exercise (Push‑up or Squat). Landmarks are detected in the browser; only keypoints are sent to `/ws/session`.
+5. Watch the counter, traffic‑light bar, and tips update in real time. Click “Stop Session” to stop.
+
+Notes and tips:
+- Performance target is ~30 FPS; actual FPS depends on your device. If slow, reduce resolution in code or browser zoom.
+- Privacy: by default, no raw video leaves your device. Only normalized 2D keypoints are sent to the server for counting.
+- If you see CORS or WS errors, verify the backend is on port 8000 and reachable from the frontend origin (5173).
 
 

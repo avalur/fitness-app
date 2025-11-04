@@ -56,6 +56,12 @@ class PoseFrame(BaseModel):
     keypoints: Dict[str, PosePoint]
 
 
+class Tick(BaseModel):
+    rep_count: int = 0
+    phase: Literal["idle", "down", "up"] = "idle"
+    feedback: List[str] = []
+
+
 class ReferenceTemplate(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid4()))
     exercise_id: str

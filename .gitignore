@@ -22,3 +22,4 @@ node_modules/
 .idea/
 .vscode/
 /backend/build/
+/backend/app.db

@@ -25,25 +25,25 @@ Each milestone section below has: tasks [ ], DoD, and tests.
 ---
 
 ### Repo scaffolding and conventions (applies to all milestones)
-- [ ] Monorepo layout
+- [x] Monorepo layout
   - `backend/` FastAPI + SQLModel/SQLite + websockets
   - `frontend/` React + Vite + TypeScript + PWA
   - `infra/` Dockerfiles, docker-compose, GitHub Actions
   - `shared/` protocol types (JSON schemas, sample fixtures)
-- [ ] Python 3.11, Node 20; `uv` or `pip-tools` for locks; `pnpm` for FE
+- [x] Python 3.11, Node 20; `uv` or `pip-tools` for locks; `npm` for FE
 - [ ] Pre-commit hooks: `black`, `ruff`, `isort`, `mypy` (strict), `eslint`, `prettier`
 - [ ] Feature flags (env): `POSE_CLIENT=on|off`, `ANALYSIS_REMOTE=on|off`, `LLM_PROVIDER=openai|vertex|azure|mock`
 - [ ] Security defaults: `.env.example`, secrets via env only, CORS origins set, WSS/TLS ready
 
 Definition of Done (Repo):
-- [ ] `make up` builds and runs both services via Docker
+- [x] `make up` builds and runs both services via Docker
 - [ ] CI green for lint, type check, unit tests
 
 ---
 
 ### M1 — Scaffolding + Plan Generator Stub
 #### Backend (FastAPI)
-- [ ] Create app skeleton: `app/main.py`, `app/api`, `app/models`, `app/services`, `app/db.py`
+- [x] Create app skeleton: `app/main.py`, `app/api`, `app/models`, `app/services`, `app/db.py`
 - [ ] Data models (lines 54–63) in Pydantic/SQLModel:
   - [ ] `UserGoal`, `Exercise`, `WorkoutPlan`, `PosePoint`, `PoseFrame`, `Session`, `ReferenceTemplate`
   - [ ] JSON Schema exports under `shared/schemas/*.json`
@@ -53,19 +53,19 @@ Definition of Done (Repo):
   - [ ] `POST /plans` → accepts `UserGoal`, returns `WorkoutPlan`
   - [ ] `GET /plans/{id}`
   - [ ] `POST /references` (upsert)
-- [ ] LLM wrapper (stubbed): `services/llm.py`
+- [x] LLM wrapper (stubbed): `services/llm.py`
   - [ ] Prompt composer to enforce strict JSON schema (line 86)
-  - [ ] `LLM_PROVIDER=mock` returns `examples/plan_demo_001.json` (lines 131–149)
+  - [x] `LLM_PROVIDER=mock` returns `examples/plan_demo_001.json` (lines 131–149)
 - [ ] Seed fixtures: example plan and reference template (lines 154–165)
 
 #### Frontend (React + Vite + TS)
-- [ ] Project boot with routing: `/onboarding`, `/plan`, `/live`, `/history`
-- [ ] Types based on shared schemas
-- [ ] Onboarding form collects: goal, level, constraints/equipment, days/week (lines 91–95)
-- [ ] `POST /plans` integration, render plan JSON with images/explanations
+- [x] Project boot with routing: `/onboarding`, `/plan`, `/live`, `/history`
+- [x] Types based on shared schemas
+- [x] Onboarding form collects: goal, level, constraints/equipment, days/week (lines 91–95)
+- [x] `POST /plans` integration, render plan JSON with images/explanations
 
 #### DevOps
-- [ ] Dockerfiles (multi-stage) for backend and frontend
+- [x] Dockerfiles (multi-stage) for backend and frontend
 - [ ] docker-compose for local dev; CORS + reverse proxy `traefik` or `nginx`
 - [ ] GitHub Actions: lint, type-check, test, build images
 

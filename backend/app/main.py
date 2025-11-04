@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .db import create_db_and_tables
 from .api.routers.plans import router as plans_router
 from .api.routers.references import router as references_router
+from .api.ws.session import router as ws_router
 
 
 def get_cors_origins() -> List[str]:
@@ -39,3 +40,4 @@ async def health() -> dict:
 
 app.include_router(plans_router, prefix="/api")
 app.include_router(references_router, prefix="/api")
+app.include_router(ws_router)
