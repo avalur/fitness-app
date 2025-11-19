@@ -143,3 +143,9 @@ Notes and tips:
 - If you see CORS or WS errors, verify the backend is on port 8000 and reachable from the frontend origin (5173).
 
 
+
+License
+-------
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+
